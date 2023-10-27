@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign up</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" href="logo.png">
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+            integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+          integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
+
+    <script type="text/javascript" src="script.js"></script>
+
+    <style>
+        body {
+            color: #999;
+            background: #97c0e0;
+            font-family: 'Varela Round', sans-serif;
+        }
+
+        .login-form {
+            width: 50%;
+            margin: 0 auto;
+            padding: 30px 0;
+        }
+        .login-form form {
+            color: #434343;
+            border-radius: 1px;
+            margin-bottom: 15px;
+            background: #fff;
+            border: 1px solid #f3f3f3;
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+        }
+
+        .login-form .avatar {
+            color: #fff;
+            margin: 0 auto 30px;
+            text-align: center;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            z-index: 9;
+            background: #4aba70;
+            padding: 15px;
+            box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+        }
+        .login-form .avatar i {
+            font-size: 48px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="login-form" >
+    <form class="rounded rounded-3"
+         style="padding-left: 15%; padding-right: 15%">
+
+        <img src="banner.png" class="w-100">
+
+        <h1 class="text-center fw-bold" style="font-size: 24px">Create new account</h1>
+        <div class="text-center small">Already have an account? <a href="#" onclick="sign_in()">Sign in</a></div>
+
+        <div class="py-2"></div>
+
+        <div class="mb-1">
+            <label for="username" class="form-label">Username:</label>
+            <input type="text" class="form-control" id="username">
+        </div>
+
+        <div class="mb-1">
+            <label for="phone" class="form-label">Phone:</label>
+            <input type="tel" class="form-control" id="phone">
+        </div>
+
+        <div class="mb-1">
+            <label for="phone" class="form-label">Email:</label>
+            <input type="email" class="form-control" id="email">
+        </div>
+
+        <div class="mb-1">
+            <label for="username" class="form-label">Nic number:</label>
+            <input type="text" class="form-control" id="nic">
+        </div>
+
+        <div class="mb-1">
+            <label for="username" class="form-label">Full name:</label>
+            <input type="text" class="form-control" id="full_name">
+        </div>
+
+        <div class="mb-1">
+            <label for="username" class="form-label">Company name:</label>
+            <input type="text" class="form-control" id="company">
+        </div>
+
+
+        <div class="mb-1">
+            <label for="password" class="form-label">Password:</label>
+            <input type="password" class="form-control" id="password">
+        </div>
+
+        <div class="mb-2">
+            <label for="password_c" class="form-label">Password confirmation:</label>
+            <input type="password" class="form-control" id="password_c">
+        </div>
+
+        <div class="w-100 text-center">
+            <button type="button" onclick="sign_up()"
+                    style="border-radius: 24px; width: 90%; background-color: #c3c3c3"
+                    class="mt-2 btn btn-primary mb-2 text-center border-0">Create an account</button>
+        </div>
+
+    </form>
+
+</div>
+
+<script>
+    function sign_in() {window.location.href = "sign_in.html";}
+
+    function sign_up() {
+
+        let username = document.getElementById("username").value;
+        let email = document.getElementById("email").value;
+        let nic = document.getElementById("nic").value;
+        let full = document.getElementById("full_name").value;
+        let company = document.getElementById("company").value;
+        let password = document.getElementById("password").value;
+        let password_conf = document.getElementById("password_c").value;
+        let phone = document.getElementById("phone").value;
+
+        if (!(username.length > 0 && password.length > 0 && password_conf.length > 0 && phone.length > 0)) {
+            alert("Please check your details!");
+            return;
+        }
+
+        if (password !== password_conf){
+            alert("Passwords should be same!");
+            return;
+        }
+
+        let data = {
+            username: username,
+            password: password,
+            phone: phone,
+            email,
+            company,
+            full_name: full,
+        }
+
+        handle_post_request("add", "employee", data, "", function () {
+            window.location.href = URL_PREFIX + "";
+        });
+
+    }
+
+</script>
+
+</body>
+</html>
+
+
+
+
